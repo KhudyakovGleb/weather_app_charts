@@ -1,3 +1,12 @@
 apiVersion: v1
-entries: {}
+entries:
+  weather-app:
+    - apiVersion: v2
+      appVersion: "1.0.0"
+      created: "2025-04-10T21:12:05.247550446+03:00"
+      description: "Weather App"
+      name: weather-app
+      version: 0.1.0
+      urls:
+        - https://KhudyakovGleb.github.io/weather_app_charts/weather-app-0.1.0.tgz
 generated: "2025-04-10T21:12:05.247550446+03:00"
