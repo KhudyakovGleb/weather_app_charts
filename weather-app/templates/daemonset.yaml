@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: {{ include "weather-app.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "weather-app.name" . }}
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "weather-app.name" . }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "weather-app.name" . }}
+    spec:
+      containers:
+        - name: {{ include "weather-app.name" . }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          env:
+            - name: VERSION
+              value: "{{ .Values.versionEnv }}"
+            - name: API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secret.name }}
+                  key: {{ .Values.secret.apiKeyKey }}
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+          ports:
+            - name: web
+              containerPort: 8080
+              protocol: TCP

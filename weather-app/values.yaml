@@ -1,0 +1,18 @@
+image:
+  repository: glebkhudyakov/weather_app
+  tag: latest
+
+versionEnv: "0.1.2"
+
+service:
+  port: 8000
+
+ingress:
+  enabled: true
+  path: /
+  pathType: Prefix
+  servicePort: 8000
+
+secret:
+  name: weather-app-secret
+  apiKeyKey: api_key
